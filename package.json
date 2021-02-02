@@ -1,0 +1,36 @@
+{
+  "name": "ogrest",
+  "version": "0.1.0",
+  "description": "nestjs fullstack framework",
+  "homepage": "https://github.com/cereschen/ogrest",
+  "keywords": [
+    "fullstack",
+    "nestjs",
+    "vue",
+    "react",
+    "angular",
+    "svelte"
+  ],
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "./loader.js",
+    "example"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w"
+  },
+  "author": "cereschen",
+  "license": "MIT",
+  "dependencies": {
+    "loader-utils": "^2.0.0",
+    "ts-morph": "^9.1.0"
+  },
+  "devDependencies": {
+    "magic-string": "^0.25.7",
+    "@types/loader-utils": "^2.0.1",
+    "@types/webpack": "^4.41.22",
+    "axios": "^0.21.1"
+  }
+}
