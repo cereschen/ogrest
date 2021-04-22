@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.transformJs = void 0;
-const ts_morph_1 = require("ts-morph");
-function transformJs(config) {
-    const project = new ts_morph_1.Project({ useInMemoryFileSystem: true });
+import { Project, Node } from "ts-morph";
+export function transformJs(config) {
+    const project = new Project({ useInMemoryFileSystem: true });
     const Methods = ['Post', 'Get', 'Put', 'Delete', 'Options', 'Patch', 'Head'];
     return function main({ code }) {
         var _a;
@@ -11,11 +8,11 @@ function transformJs(config) {
         const exportedClass = sf.getClasses()[0];
         const baseUrlNode = (_a = exportedClass === null || exportedClass === void 0 ? void 0 : exportedClass.getDecorator('Controller')) === null || _a === void 0 ? void 0 : _a.getArguments()[0];
         const membersCode = [];
-        if (!ts_morph_1.Node.isStringLiteral(baseUrlNode))
+        if (!Node.isStringLiteral(baseUrlNode))
             return { code };
         const baseUrl = baseUrlNode.getLiteralText();
         function getArg0Str(node) {
-            if (ts_morph_1.Node.isStringLiteral(node)) {
+            if (Node.isStringLiteral(node)) {
                 let str = node.getLiteralText().replace(/:[^]*/, '');
                 return str ? '/' + str : '';
             }
@@ -53,4 +50,3 @@ function transformJs(config) {
         return { code: out };
     };
 }
-exports.transformJs = transformJs;

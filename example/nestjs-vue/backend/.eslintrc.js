@@ -9,7 +9,6 @@ module.exports = {
   root: true,
 
   env: {
-    browser: true,
     node: true,
     jest: true,
   },
@@ -26,9 +25,6 @@ module.exports = {
 
   extends: [
     'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
-    '@vue/typescript',
-    'plugin:vue/vue3-essential',
-    '@vue/typescript/recommended',
+    'prettier/@typescript-eslint'
   ],
 };

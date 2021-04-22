@@ -1,26 +1,14 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const tramsfrom_1 = require("./tramsfrom");
-const loader_utils_1 = require("loader-utils");
-function noRefWebpack(source) {
+import { transformJs } from "./tramsfrom";
+import { getOptions } from 'loader-utils';
+export default function ogrestWebpack(source) {
     if (!this.resourcePath.match(/\.controller.ts$/))
         return source;
-    let options = loader_utils_1.getOptions(this);
-    let transform = tramsfrom_1.transformJs(Object.assign(Object.assign({}, options), { isVite: false }));
+    let options = getOptions(this);
+    let transform = transformJs(Object.assign({}, options));
     if (typeof source === "string") {
-        let result = { code: source };
-        if (this.resourcePath.match(/\.(vue)$/)) {
-            result = transform({ code: source });
-        }
-        else if (this.resourcePath.includes('use')) {
-            result = transform({ code: source });
-        }
-        else {
-            return source;
-        }
+        let result = transform({ code: source });
         //@ts-ignore  source-map type
         this.callback(null, result.code, this.sourceMap ? result.map : undefined);
     }
-    return;
+    return source;
 }
-exports.default = noRefWebpack;

@@ -28,9 +28,9 @@
     "ts-morph": "^9.1.0"
   },
   "devDependencies": {
-    "magic-string": "^0.25.7",
     "@types/loader-utils": "^2.0.1",
     "@types/webpack": "^4.41.22",
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "magic-string": "^0.25.7"
   }
 }

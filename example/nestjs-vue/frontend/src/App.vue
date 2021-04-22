@@ -5,16 +5,16 @@
   <ul>
     <li v-for="{firstName,lastName,id} in list" :key="id">
       {{ firstName }} {{ lastName }}
-      <span style="cursor: pointer; " @click="remove(id)">X</span>
+      <span style="cursor: pointer;color: red;" @click="remove(id)">X</span>
     </li>
   </ul>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import type { User } from './user/entities/user.entity';
-import { UserController } from './user/user.controller';
-import { wrap } from 'nest-fullstack';
+import type { User } from 'backend/user/entities/user.entity';
+import { UserController } from 'backend/user/user.controller';
+import { wrap } from '../../../../dist/index.js';
 
 export default defineComponent({
   name: 'App',
@@ -23,15 +23,14 @@ export default defineComponent({
   setup() {
     const list = ref<User[]>([])
     const ctl = wrap(UserController)
-    ctl.findAll(undefined).then(res => {
-      console.log(res.results);
+    ctl.findAll().then(res => {
       list.value = res.results
     })
     async function create() {
       await ctl.create(form.value)
       await ctl.findAll().then(v => list.value = v.results)
     }
-
+    
     async function remove(id: number) {
       await ctl.remove(id.toString())
       await ctl.findAll().then(v => list.value = v.results)
@@ -39,7 +38,6 @@ export default defineComponent({
     const form = ref<CreateUserDto>({ lastName: '', firstName: '' })
     return { create, remove, list, form }
   }
-
 });
 </script>
 
